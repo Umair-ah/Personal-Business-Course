@@ -1,0 +1,118 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="border-bottom: 1px solid black;">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav d-flex mx-auto">
+          <% if current_user %>
+              <li class="nav-item">
+                <%= form_tag(my_courses_path, method: :get, class:"mycoursesForm nav-link #{active?(my_courses_path)}") do %>
+                  <%= submit_tag "My Courses", class:"mycoursesNavBtn nav-link #{active?(my_courses_path)}", style:"background:transparent; border: none;"%>
+                <% end %>
+
+                  <script>
+                      document.addEventListener("turbo:load", loadNavForm)
+
+                      function loadNavForm()
+                      {
+
+                        const mycoursesForm = document.querySelector(".mycoursesForm");
+                          const mycoursesNavBtn = document.querySelector(".mycoursesNavBtn");
+
+                          mycoursesNavBtn.addEventListener("click", loadmycoursesForm)
+
+                          function loadmycoursesForm()
+                          {
+                            mycoursesForm.submit();
+                          }
+
+                      }
+
+                  </script>
+              
+              </li>
+            <% end %>
+
+          <li class="nav-item">
+            <%= form_tag(courses_path, method: :get, class:"coursesForm nav-link #{active?(courses_path)}") do %>
+              <%= submit_tag "Browse Courses", class:"coursesNavBtn nav-link #{active?(courses_path)}", style:"background:transparent; border: none;"%>
+            <% end %>
+
+              <script>
+                  document.addEventListener("turbo:load", loadNavForm)
+
+                  function loadNavForm()
+                  {
+                    
+                    const coursesForm = document.querySelector(".coursesForm");
+                      const coursesNavBtn = document.querySelector(".coursesNavBtn");
+
+                      coursesNavBtn.addEventListener("click", loadcoursesForm)
+
+                      function loadcoursesForm()
+                      {
+                        coursesForm.submit();
+                      }
+
+                  }
+
+              </script>
+          
+            </li>
+
+        <% unless current_user %>
+          <li class="nav-item mt-2">
+            <%= link_to "Sign Up", new_user_registration_path, class:" nav-link mx-2 btn rounded-0 btn-dark text-white", style:" padding-left: 20px; padding-right: 20px;" %>
+
+          </li>
+          <li class="nav-item mt-2">
+            <%= link_to "Log In", new_user_session_path, class:" nav-link mx-2 btn rounded-0", style:"border: 1px solid; padding-left: 20px; padding-right: 20px;" %>
+          </li>
+        <% end %>
+
+        <% if current_user %>
+        
+        <li class="nav-item dropdown" style="margin:16px; cursor: pointer; ">
+          <%= current_user.email %><span class="bi bi-caret-down-fill"></span>
+          <ul class="dropdown-content no-bullets" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;">
+            <li class="p-3">
+              <%= link_to edit_user_registration_path, class:"#{active?(edit_user_registration_path)}" do %>
+                  <h6 class="text-black"><i class="bi bi-person"></i> Account</h6>
+              <% end %>
+              
+            </li>
+
+
+            <li class="p-3">
+              <%= link_to edit_user_registration_path, class:"#{active?(edit_user_registration_path)}" do %>
+                  <h6 class="text-black"><i class="bi bi-cash"></i> Purchased</h6>
+              <% end %>
+              
+            </li>
+
+            <li class="p-3">
+              <% if current_user %>
+                <%= button_to destroy_user_session_path, 
+                style:"background: transparent; border: none; color: black;",
+                method: :delete do
+                %>
+                  <h6 class="text-black"><i class="bi bi-box-arrow-right"></i> Log Out</h6>
+                
+                <% end %>
+                
+              <% end %>
+            </li>
+          </ul>
+        </li>
+
+          
+        <% end %>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
