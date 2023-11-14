@@ -24,4 +24,31 @@ class CoursesController < ApplicationController
   def edit
   end
 
- 
+  def update
+    if @course.update(course_params)
+      redirect_to courses_path
+      flash[:notice] = "Course Updated!"
+    else 
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    if @course.destroy
+      redirect_to courses_path
+      flash[:alert] = "Course '#{@course.title}' Deleted!"
+    end
+  end
+
+
+  private
+    def set_course
+      @course = Course.find(params[:id])
+    end
+
+    def course_params
+      params.require(:course).permit(:title, :description, :price, :user_id, :thumbnail)
+    end
+
+
+end
