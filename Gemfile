@@ -72,3 +72,6 @@ group :test do
 end
 
 gem "devise"
+gem "stripe", "~> 9.0"
+gem "pay"
+gem "ransack"
