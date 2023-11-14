@@ -1,0 +1,23 @@
+<div class="h1 text-center text-dark" style="margin-top:100px;" id="pageHeaderTitle">Browse New Courses</div>
+<% if current_user.try(:type) %>
+  <div class="d-flex justify-content-center">
+    <%= link_to new_course_path do %>
+
+      <h6 class="btn btn-md btn-danger rounded-0 mb-4"><i class="bi bi-plus"></i> New Course</h6>
+    
+    <% end %>
+    
+  </div>
+<% end %>
+
+<div class="d-flex justify-content-center">
+  <%= search_form_for(@q, url: courses_path, method: :get) do |f| %>
+    <%= f.search_field :title_cont, placeholder: "Search Course", class:"form-control me-2 rounded-2" %>
+  <% end %>
+</div>
+
+<% @courses.each do |course| %>
+  <%= render "shared/course_cards", course: course %>
+<% end %>
+
+
