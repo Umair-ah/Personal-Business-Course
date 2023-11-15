@@ -53,4 +53,33 @@ class TutsController < ApplicationController
     head :ok
   end
 
+  def destroy
+    if @tut.destroy
+      redirect_to course_tuts_path(@course), notice: "Video Deleted!"
+    end
+  end
+  
+
+
+  def show
+    unless @tut.user_has_access?(current_user) || current_user.try(:type)
+      redirect_to course_payments_path(params[:course_id]), alert: "You Have Not Payed for the course yet!"
+    end
+    @course = Course.find(params[:course_id])
+    @tuts = @course.tuts.all
+  end
+
+  private
+    def set_course
+      @course = Course.find(params[:course_id])
+    end
+
+    def set_tut
+      @tut = Tut.find(params[:id])
+    end
+
+    def tut_params
+      params.require(:tut).permit(:course_id, :title, :video, :position)
+    end
+
 end
