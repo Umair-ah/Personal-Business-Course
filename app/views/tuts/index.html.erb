@@ -1,0 +1,50 @@
+<%= render "payments/asdf" %>
+
+</div>
+<% if current_user.try(:type) %>
+  <div class="mt-4 d-flex justify-content-center mb-2"> 
+    <%= link_to "Add Video", new_course_tut_path(Course.find(params[:course_id])), class:"btn btn-danger" %>
+  </div>
+<% end %>
+
+<div class="container mt-4">
+  <div class="">
+    <div id="tuts">
+    <ul 
+      class="no-bullets"
+      data-controller="sortable"
+      data-sortable-resource-name-value="tut"
+      data-sortable-handle-value=".handle">
+      <% @tuts.each do |tut| %>
+      <li 
+        class="list-vids"
+        data-sortable-update-url="<%= update_position_course_tut_path(tut.course, tut) %>">
+        <div class="container">
+          <div class="d-flex justify-content-between">
+            <%= link_to course_tut_path(@course, tut) do %>
+              <h6><i class="bi bi-play"></i> <%= tut.title %></h6>
+            <% end %>
+            
+            <div class="d-flex justify-content-end gap-3">
+              <% if current_user.try(:type) %>
+                <i class="bi bi-grip-vertical handle all-scroll" style="color: black;"></i>
+
+                <%= link_to edit_course_tut_path(@course, tut) do %>
+                  <i class="bi bi-pencil" style="color:red;"></i>
+                <% end %>
+                <%= button_to course_tut_path(@course, tut), method: :delete, style:"background:transparent; border:none;" do %>
+                  <i class="bi bi-trash" style="color:red;"></i>
+                <% end %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </li>
+      <% end %>
+    </ul>
+    </div>
+      <%= link_to "Back", courses_path, class:"btn btn-sm btn-primary mt-3" %>
+  </div>
+</div>
+
+
