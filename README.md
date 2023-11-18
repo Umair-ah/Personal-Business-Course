@@ -43,7 +43,7 @@
 
 ## Overview
 
-This is a comprehensive course selling platform developed for Peronsal Business. The platform allows users to browse, purchase courses offered by the business. The application integrates with the Stripe API for secure and seamless payment processing.
+This is a comprehensive course selling platform developed for Peronsal Business. The platform allows users to browse, purchase courses offered by the business. The application integrates with the Stripe API for secure and seamless payment processing and custom server side logic developed in Pure Ruby language for handling courses, videos, payments logic etc.
 
 ## Features
 
