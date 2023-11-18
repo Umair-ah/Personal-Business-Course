@@ -1,4 +1,13 @@
-# Developed By Team 4
+# Course Selling Platform
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Rails Version](https://img.shields.io/badge/Rails-7.0.8-red.svg)](https://rubyonrails.org/)
+[![PostgreSQL Version](https://img.shields.io/badge/PostgreSQL-14.10-blue.svg)](https://www.postgresql.org/)
+[![Stripe API](https://img.shields.io/badge/Stripe%20API-9.0.0-green.svg)](https://stripe.com/)
+
+# P.D.A College Of Engineering - Batch 21CS
+
+## Developed By Team 4
 
 ## Team Lead:
 
@@ -32,13 +41,6 @@
 - 💻 **Aman**
 - 💻 **Altamash**
 
-# Course Selling Platform
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Rails Version](https://img.shields.io/badge/Rails-6.1.4-red.svg)](https://rubyonrails.org/)
-[![PostgreSQL Version](https://img.shields.io/badge/PostgreSQL-13.3-blue.svg)](https://www.postgresql.org/)
-[![Stripe API](https://img.shields.io/badge/Stripe%20API-3.0.0-green.svg)](https://stripe.com/)
-
 ## Overview
 
 This is a comprehensive course selling platform developed for Peronsal Business. The platform allows users to browse, purchase courses offered by the business. The application integrates with the Stripe API for secure and seamless payment processing.
@@ -52,20 +54,8 @@ This is a comprehensive course selling platform developed for Peronsal Business.
 - One-to-Many and Many-to-Many relationships in PostgreSQL database.
 - Robust backend server-side code for efficient processing.
 
-# Technologies Used
+## Technologies Used
 
 - **Ruby on Rails 7.0.8**: [Official Website](https://rubyonrails.org/)
 - **PostgreSQL 14**: [Official Website](https://www.postgresql.org/)
 - **Stripe API 9.0.0**: [Official Website](https://stripe.com/)
-
-## **Ruby on Rails 7.0.8**
-
-- [Official Website](https://rubyonrails.org/)
-
-## **PostgreSQL 14**
-
-- [Official Website](https://www.postgresql.org/)
-
-## **Stripe API 9.0.0**
-
-- [Official Website](https://stripe.com/)
