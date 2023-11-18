@@ -1,4 +1,4 @@
-# Course Selling Platform
+# Personal Business Course Selling Platform
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Rails Version](https://img.shields.io/badge/Rails-7.0.8-red.svg)](https://rubyonrails.org/)
