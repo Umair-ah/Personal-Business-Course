@@ -6,6 +6,11 @@ class Course < ApplicationRecord
   has_many :payments
   has_many :users, through: :payments
 
+  validates :title, presence: true
+  validates :description, presence: true
+  validates :price, presence: true
+
+
 
   after_create :create_stripe_product_and_price
  

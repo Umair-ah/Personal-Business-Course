@@ -1,5 +1,17 @@
 <h5 class="text-center mt-5">Create Course</h5>
-<%= form_for course do |f| %>
+<%= form_for course ,data: {controller: "course", course_target: "form"} do |f| %>
+
+  <div class="d-flex justify-content-start align-items-start">
+    <% if course.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% course.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
 
 
   <div class="row text-black">
@@ -21,30 +33,18 @@
 
     <style>
       input[type="file"]::file-selector-button {
-<<<<<<< HEAD
         border: 2px solid #b252f4;
         padding: 0.2em 0.4em;
         border-radius: 0.2em;
         background-color: #b252f4;;
-=======
-        border: 2px solid #dc35f0;
-        padding: 0.2em 0.4em;
-        border-radius: 0.2em;
-        background-color: #dc35f0;
->>>>>>> df9ef09d063a6f5bd157a7705233310028dee68b
         color: white;
         transition: 1s;
         cursor: pointer;
       }
 
       input[type="file"]::file-selector-button:hover {
-<<<<<<< HEAD
         background-color: #d8a0ff;
         border: 2px solid #d8a0ff;
-=======
-        background-color: #f498ff;
-        border: 2px solid #f498ff;
->>>>>>> df9ef09d063a6f5bd157a7705233310028dee68b
       }
     </style>
     <div class="d-flex flex-column my-4">
@@ -52,12 +52,13 @@
       <%= f.file_field :thumbnail, direct_upload: true %>
     </div>
 
-    
+  
 
     
     
     <div class="my-2">
-      <%= f.submit "Create Course", class:"btn btn-primary rounded-0" %>
+
+      <%= f.submit "Create Course", class:"btn btn-primary rounded-0", id:"courseBtn", data:{course_target: "button", action:"click->course#loadBtn"} %>
     </div>
 
   </div>
