@@ -55,5 +55,5 @@ This is a comprehensive course selling platform developed for Peronsal Business.
 ## Technologies Used
 
 - **Ruby on Rails 7.0.8**: [Official Website](https://rubyonrails.org/)
-- **PostgreSQL 13.3**: [Official Website](https://www.postgresql.org/)
-- **Stripe API 3.0.0**: [Official Website](https://stripe.com/)
+- **PostgreSQL 14**: [Official Website](https://www.postgresql.org/)
+- **Stripe API 9.0.0**: [Official Website](https://stripe.com/)
