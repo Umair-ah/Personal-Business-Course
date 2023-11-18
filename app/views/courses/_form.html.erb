@@ -58,7 +58,15 @@
     
     <div class="my-2">
 
-      <%= f.submit "Create Course", class:"btn btn-primary rounded-0", id:"courseBtn", data:{course_target: "button", action:"click->course#loadBtn"} %>
+      <%= button_tag(type: 'submit', class: 'btn btn-primary rounded-0', data:{course_target: "button", action:"click->course#loadBtn"}) do %>
+        
+        <div class="d-flex justify-content-center align-items-center gap-3">
+          <div id="course-btn-text">Create Course</div>
+          <div class="spinner-border d-none" id="spinner" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      <% end %>
     </div>
 
   </div>
