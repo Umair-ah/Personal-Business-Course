@@ -1,24 +1,59 @@
-# README
+# Developed By Team 4
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Team Lead:
 
-Things you may want to cover:
+🚀 **Umair (FullStack Dev)**
 
-* Ruby version
+## Team Manager:
 
-* System dependencies
+🎨 **Srushti (Frontend Dev)**
 
-* Configuration
+## Members:
 
-* Database creation
+### Frontend Developers:
 
-* Database initialization
+- 💻 **Shreya Kirangi**
+- 💻 **Shreya Kulkarni**
+- 💻 **Srushti**
+- 💻 **Sumeet**
+- 💻 **Pragnya**
+- 💻 **Sonakshi Godbole**
 
-* How to run the test suite
+### Backend Developers:
 
-* Services (job queues, cache servers, search engines, etc.)
+- 💻 **Sadaf**
+- 💻 **Abdul Rahman**
+- 💻 **Rizwan**
+- 💻 **Farhan**
+- 💻 **Muzammil**
+- 💻 **Ahmed**
+- 💻 **Shashank**
+- 💻 **Raihan**
+- 💻 **Aman**
+- 💻 **Altamash**
 
-* Deployment instructions
+# Course Selling Platform
 
-* ...
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Rails Version](https://img.shields.io/badge/Rails-6.1.4-red.svg)](https://rubyonrails.org/)
+[![PostgreSQL Version](https://img.shields.io/badge/PostgreSQL-13.3-blue.svg)](https://www.postgresql.org/)
+[![Stripe API](https://img.shields.io/badge/Stripe%20API-3.0.0-green.svg)](https://stripe.com/)
+
+## Overview
+
+This is a comprehensive course selling platform developed for Peronsal Business. The platform allows users to browse, purchase courses offered by the business. The application integrates with the Stripe API for secure and seamless payment processing.
+
+## Features
+
+- User authentication and authorization.
+- Course listing and details.
+- Secure payment processing using Stripe API.
+- Admin control with Single Table Inheritance (STI).
+- One-to-Many and Many-to-Many relationships in PostgreSQL database.
+- Robust backend server-side code for efficient processing.
+
+## Technologies Used
+
+- **Ruby on Rails 7.0.8**: [Official Website](https://rubyonrails.org/)
+- **PostgreSQL 13.3**: [Official Website](https://www.postgresql.org/)
+- **Stripe API 3.0.0**: [Official Website](https://stripe.com/)
