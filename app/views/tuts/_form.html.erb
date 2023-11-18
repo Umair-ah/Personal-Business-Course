@@ -1,6 +1,18 @@
 <h5 class="text-center mt-5">Upload Video for <%= @course.title %></h5>
-<%= form_with(model:[@course, tut], local: true) do |f| %>
-  <div class="row mt-5 text-black">
+<%= form_with(model:[@course, tut], local: true,data: {controller: "tut", tut_target: "form"}) do |f| %>
+
+  <div class="d-flex justify-content-center align-items-start mt-3">
+    <% if tut.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <ul>
+          <% tut.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+  </div>
+  <div class="row mt-1 text-black">
     <div class="col"></div>
     <div class="col-md-6">
       <%= f.label :Title %>
@@ -38,7 +50,15 @@
       <div class="col"></div>
       
       <div class="col mt-2">
-        <%= f.submit "Upload Video", class:"btn btn-primary rounded-0" %>
+        <%= button_tag(type: 'submit', class: 'btn btn-primary rounded-0', data:{tut_target: "button", action:"click->tut#loadBtn"}) do %>
+        
+        <div class="d-flex justify-content-center align-items-center gap-3">
+          <div id="tut-btn-text">Upload</div>
+          <div class="spinner-border d-none" id="spinner" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      <% end %>
       </div>
       <div class="col"></div>
 
