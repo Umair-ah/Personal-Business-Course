@@ -1,0 +1,56 @@
+<h5 class="text-center mt-5">Upload Video for <%= @course.title %></h5>
+<%= form_with(model:[@course, tut], local: true) do |f| %>
+  <div class="row mt-5 text-black">
+    <div class="col"></div>
+    <div class="col-md-6">
+      <%= f.label :Title %>
+      <%= f.text_field :title, class:"form-control rounded-0" %>
+    </div>
+    <div class="col"></div>
+  </div>
+
+    <style>
+      input[type="file"]::file-selector-button {
+        border: 2px solid #dc35f0;
+        padding: 0.2em 0.4em;
+        border-radius: 0.2em;
+        background-color: #dc35f0;
+        color: white;
+        transition: 1s;
+        cursor: pointer;
+      }
+
+      input[type="file"]::file-selector-button:hover {
+        background-color: #f498ff;
+        border: 2px solid #f498ff;
+      }
+    </style>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col mt-4 mb-5">
+        <%= f.file_field :video, direct_upload: true %>
+      </div>
+      <div class="col"></div>
+
+    </div>
+
+    <div class="row">
+      <div class="col"></div>
+      
+      <div class="col mt-2">
+        <%= f.submit "Upload Video", class:"btn btn-primary rounded-0" %>
+      </div>
+      <div class="col"></div>
+
+    </div>
+
+    <div class="row">
+      <div class="col"></div>
+
+      <div class='col mt-2'>
+        <%= link_to "Back", course_tuts_path(@course, tut) %>
+      </div>
+      <div class="col"></div>
+
+    </div>
+<% end %>
