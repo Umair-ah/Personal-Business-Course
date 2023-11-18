@@ -84,14 +84,6 @@
               
             </li>
 
-
-            <li class="p-3">
-              <%= link_to edit_user_registration_path, class:"#{active?(edit_user_registration_path)}" do %>
-                  <h6 class="text-black"><i class="bi bi-cash"></i> Purchased</h6>
-              <% end %>
-              
-            </li>
-
             <li class="p-3">
               <% if current_user %>
                 <%= button_to destroy_user_session_path, 

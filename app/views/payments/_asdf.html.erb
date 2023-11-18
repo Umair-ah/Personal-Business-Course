@@ -22,11 +22,19 @@
         <div>
           <% if current_user %>
             <% unless current_user.payments.exists?(course_id: params[:course_id]) %>
-              <%= render partial: "pay/stripe/checkout_button", locals: {
-                session: @checkout_session,
-                        title: "Click here to pay $#{@course.price}"
-              }%>
-            <% end %>
+              <div id="pay-btn">
+                <%= render partial: "pay/stripe/checkout_button", locals: {
+                  session: @checkout_session,
+                          title: "Click here to pay $#{@course.price}"
+                }%>
+              </div>
+              <script>
+                const payBtn = document.getElementById("pay-btn")
+                payBtn.addEventListener("click", ()=> {
+                  payBtn.innerHTML = `<button style="background-color:#51a268;color:#FFF;padding:8px 12px;border:0;font-size:1em">processing...</button>`
+                })
+              </script>
+              <% end %>
           <% else %>
             <%= link_to "Sign In and buy the course for $#{@course.price}", new_user_session_path, class:"btn btn-primary" %>
           <% end %>
