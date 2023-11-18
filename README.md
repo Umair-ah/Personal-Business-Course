@@ -52,8 +52,20 @@ This is a comprehensive course selling platform developed for Peronsal Business.
 - One-to-Many and Many-to-Many relationships in PostgreSQL database.
 - Robust backend server-side code for efficient processing.
 
-## Technologies Used
+# Technologies Used
 
 - **Ruby on Rails 7.0.8**: [Official Website](https://rubyonrails.org/)
 - **PostgreSQL 14**: [Official Website](https://www.postgresql.org/)
 - **Stripe API 9.0.0**: [Official Website](https://stripe.com/)
+
+## **Ruby on Rails 7.0.8**
+
+- [Official Website](https://rubyonrails.org/)
+
+## **PostgreSQL 14**
+
+- [Official Website](https://www.postgresql.org/)
+
+## **Stripe API 9.0.0**
+
+- [Official Website](https://stripe.com/)
