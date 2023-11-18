@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>PersonalBusinessCourse</title>
+    <title>CourseApp</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -9,9 +9,14 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <script src="https://js.stripe.com/v3/"></script>
+    
   </head>
 
-  <body>
-    <%= yield %>
+  <body style="background: #f1f5f9;">
+    <%= render "layouts/nav" %>
+    <div class="container">
+      <%= render "shared/flash_messages" %>
+      <%= yield %>
+    </div>
   </body>
 </html>
