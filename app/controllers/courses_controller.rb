@@ -2,18 +2,22 @@ require 'stripe'
 Stripe.api_key = "sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPItOne2lVDSmqxUDZ4ehVJLnqAYErZvimN46h00fYFnRiOL"
 
 class CoursesController < ApplicationController
+  # These methods are called at the start of every REQUEST (i.e POST, GET, PATCH, DELETE)
   before_action :set_course, only: %i[edit update destroy]
   before_action :authenticate_user!, except: %i[index]
 
+  # GET Request 
   def index
     @q = Course.ransack(params[:q])
     @courses = @q.result.order(created_at: :desc)
   end
 
+  # GET Request
   def new
     @course = current_user.courses.build
   end
 
+  # POST Request
   def create
     @course = current_user.courses.build(course_params)
     if @course.save
@@ -23,7 +27,7 @@ class CoursesController < ApplicationController
       render :new
     end
   end
-
+ # GET Request
   def edit
   end
 
