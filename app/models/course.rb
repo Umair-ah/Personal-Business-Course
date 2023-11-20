@@ -1,17 +1,20 @@
 class Course < ApplicationRecord
+  
+  #Rails Association (i.e Relationships:One to Many && Many to Many)
   belongs_to :user
   has_many :tuts, dependent: :destroy
   has_one_attached :thumbnail 
 
   has_many :payments
   has_many :users, through: :payments
-
+  
+#validation in form 
   validates :title, presence: true
   validates :description, presence: true
   validates :price, presence: true
 
 
-
+#calling this method after every object is created into database
   after_create :create_stripe_product_and_price
  
 
