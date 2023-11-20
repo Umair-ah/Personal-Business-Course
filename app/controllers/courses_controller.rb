@@ -6,7 +6,7 @@ class CoursesController < ApplicationController
   before_action :set_course, only: %i[edit update destroy remove_thumbnail]
   before_action :authenticate_user!, except: %i[index]
 
-  # remove attachment
+  # remove thumbnail attachment
   def remove_thumbnail
     @image = ActiveStorage::Attachment.find_by(record_id: params[:id], record_type: "Course")
     @image.purge_later
@@ -34,10 +34,12 @@ class CoursesController < ApplicationController
       render :new
     end
   end
- # GET Request
+
+  # GET Request
   def edit
   end
 
+  # PATCH Request
   def update
     if @course.update(course_params)
       redirect_to courses_path
@@ -47,6 +49,8 @@ class CoursesController < ApplicationController
     end
   end
 
+
+  # DELETE Request
   def destroy
     if @course.destroy
       redirect_to courses_path
@@ -56,10 +60,12 @@ class CoursesController < ApplicationController
 
 
   private
+    #finding the id (unique ID)
     def set_course
       @course = Course.find(params[:id])
     end
 
+    # Sending form details to database
     def course_params
       params.require(:course).permit(:title, :description, :price, :user_id, :thumbnail)
     end
