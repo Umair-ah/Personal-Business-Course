@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get "/my-courses", to: "statics#home"
 
   resources :courses do
+    member do
+      delete :remove_thumbnail
+    end
 
     resources :payments do
       collection do

@@ -5,6 +5,12 @@ class TutsController < ApplicationController
   before_action :set_course, except: %i[remove_video show]
   before_action :set_tut, only: %i[edit remove_video update show destroy]
   before_action :authenticate_user!, only: %i[show]
+
+  def remove_video
+    @video = ActiveStorage::Attachment.find_by(record_id: params[:id], record_type: "Tut")
+    @video.purge_later
+    redirect_back(fallback_location: request.referer)
+  end
   
   def index
     @tuts = @course.tuts.order(:position)

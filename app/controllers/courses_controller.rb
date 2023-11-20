@@ -3,8 +3,15 @@ Stripe.api_key = "sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPI
 
 class CoursesController < ApplicationController
   # These methods are called at the start of every REQUEST (i.e POST, GET, PATCH, DELETE)
-  before_action :set_course, only: %i[edit update destroy]
+  before_action :set_course, only: %i[edit update destroy remove_thumbnail]
   before_action :authenticate_user!, except: %i[index]
+
+  # remove attachment
+  def remove_thumbnail
+    @image = ActiveStorage::Attachment.find_by(record_id: params[:id], record_type: "Course")
+    @image.purge_later
+    redirect_back(fallback_location: request.referer)
+  end
 
   # GET Request 
   def index

@@ -21,30 +21,40 @@
     <div class="col"></div>
   </div>
 
-    <style>
-      input[type="file"]::file-selector-button {
-        border: 2px solid #dc35f0;
-        padding: 0.2em 0.4em;
-        border-radius: 0.2em;
-        background-color: #dc35f0;
-        color: white;
-        transition: 1s;
-        cursor: pointer;
-      }
 
-      input[type="file"]::file-selector-button:hover {
-        background-color: #f498ff;
-        border: 2px solid #f498ff;
-      }
-    </style>
-    <div class="row">
-      <div class="col"></div>
-      <div class="col mt-4 mb-5">
-        <%= f.file_field :video, direct_upload: true %>
+    <% if tut.video.attached? %>
+    <div class="d-flex justify-content-center align-items-center">
+      <div class="d-flex flex-column">
+        <%= video_tag(url_for(tut.video), size:"300x300", controls: true) %>
+        <%= link_to "Remove video", remove_video_course_tut_path(tut), data:{turbo_method: :delete} %>
       </div>
-      <div class="col"></div>
-
     </div>
+    <% else %>
+      <style>
+        input[type="file"]::file-selector-button {
+          border: 2px solid #dc35f0;
+          padding: 0.2em 0.4em;
+          border-radius: 0.2em;
+          background-color: #dc35f0;
+          color: white;
+          transition: 1s;
+          cursor: pointer;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+          background-color: #f498ff;
+          border: 2px solid #f498ff;
+        }
+      </style>
+      <div class="row">
+        <div class="col"></div>
+        <div class="col mt-4 mb-5">
+          <%= f.file_field :video, direct_upload: true %>
+        </div>
+        <div class="col"></div>
+
+      </div>
+    <% end %>
 
     <div class="row">
       <div class="col"></div>
