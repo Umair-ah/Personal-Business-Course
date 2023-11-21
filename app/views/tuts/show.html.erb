@@ -18,6 +18,13 @@
       <hr style="color: black;" />
 
       <div>
+        <%= link_to edit_course_tut_path(@tut.course) do %>
+          <i class="bi bi-gear-fill"></i>
+        <% end %>
+        
+      </div>
+
+      <div>
         <% @tut.videos_blobs.each_with_index do |blob, index| %>
           <% filename = blob.filename.to_s.gsub(/\.mp4\z/, '') %>
           <ul class="list-group">

@@ -29,9 +29,10 @@ class TutsController < ApplicationController
   end
 
   def remove_video
-    @video = ActiveStorage::Attachment.find_by(record_id: params[:id], record_type: "Tut")
-    @video.purge_later
-    redirect_back(fallback_location: request.referer)
+    if @tut.videos.find_by(blob_id: params[:blob_id]).purge_later
+      redirect_to edit_course_tut_path(@tut.course)
+      flash.now[:notice] = "Video Deleted!"
+    end
   end
 
   # GET Request
@@ -72,9 +73,11 @@ class TutsController < ApplicationController
 
   # PATCH Request
   def update
+    @tut = Tut.find(params[:id])
     if @tut.update(tut_params)
       redirect_to course_tuts_path(@course)
     end
+  
   end
 
  # PATCH Request which dynamically changes the position of the video while sorting (Admin feature)

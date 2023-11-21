@@ -1,8 +1,10 @@
 class Tut < ApplicationRecord
-  acts_as_list
-  belongs_to :course
+  include AppendToHasManyAttached['videos'] # you can include it before or after, order does not matter, explanation below
   has_many_attached :videos
-  has_one :video
+  belongs_to :course
+  acts_as_list
+
+
 
   validates :title, presence: true
 
