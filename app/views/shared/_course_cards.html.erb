@@ -1,6 +1,5 @@
 <div class="my-4">
   <div class="row text-black course-card">
-
     <div class="col-md-5">
       <% if course.thumbnail.attached? %>
         <%= image_tag(course.thumbnail, class:"mx-auto ratio ratio-16x9 rounded-0 course-img" ,width:"auto", height:"auto") %>
@@ -16,7 +15,6 @@
           <p class="text-secondary">
             <%= course.description %>
           </p>
-
           <small class="text-secondary"><%= course.tuts.count %> lectures</small>
         </div>
         <div>
@@ -31,21 +29,16 @@
               $ <%= course.price %> 
             </div>
           <% end %>
-
           <% if current_user %>
             <% if current_user.payments.exists?(course_id: course.id) %>
               <%= link_to course_tuts_path(course) do %>
                 <li class="btn btn-md btn-primary rounded-0"><i class="bi bi-play" style="font-size: large;"></i>Start Watching</li>
               <% end %>
-            
             <% else %>
-
               <%= link_to course_tuts_path(course) do %>
                 <li class="btn btn-sm btn-dark rounded-0">View Details</li>
-              <% end %>
-            
+              <% end %>   
             <% end %>
-
           <% else %>
             <%= link_to course_tuts_path(course) do %>
               <li class="btn btn-sm btn-dark rounded-0">View Details</li>
@@ -54,16 +47,12 @@
 
           <% if current_user.try(:type) %>
             <%= link_to edit_course_path(course) do %>
-
-              <li class="btn btn-sm btn-outline-danger"><i class="bi bi-pencil"></i> Edit </li>
-            
+              <li class="btn btn-sm btn-outline-danger"><i class="bi bi-pencil"></i> Edit </li>           
             <% end %>
-            
           <% end %>
-        </div>
 
+        </div>
       </div>
     </div>
-
   </div>
 </div>
