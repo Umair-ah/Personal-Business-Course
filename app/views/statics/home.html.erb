@@ -1,16 +1,8 @@
 <div class="h1 text-center text-dark" id="pageHeaderTitle" style="margin-top:100px;">My Courses</div>
 <% if current_user.try(:type) %>
-
   <h2 style="color: red;" class="text-center">YOU ARE AN ADMIN, YOU DON'T NEED TO BUY COURSE!</h2>
-
-
 <% end %>
-
 
 <% @my_courses.each do |course| %>
   <%= render "shared/course_cards", course: course %>
 <% end %>
-
-
-
-
