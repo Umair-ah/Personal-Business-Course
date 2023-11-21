@@ -3,9 +3,16 @@ Stripe.api_key = "sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPI
 
 class TutsController < ApplicationController
   # These methods are called at the start of every REQUEST (i.e POST, GET, PATCH, DELETE)
-  before_action :set_course, except: %i[remove_video show edit_filename_post]
-  before_action :set_tut, only: %i[edit remove_video update show destroy edit_filename_post edit_filename]
+  before_action :set_course, except: %i[remove_video show edit_filename_post delete_file_post]
+  before_action :set_tut, only: %i[edit remove_video update show destroy edit_filename_post edit_filename delete_file_post]
   before_action :authenticate_user!, only: %i[show]
+
+  def delete_file_post
+    if @tut.videos.find_by(blob_id: params[:blob_id]).purge_later
+      redirect_to course_tut_path(@tut.course, @tut, params[:blob_id])
+      flash.now[:notice] = "Video Deleted!"
+    end
+  end
 
   def edit_filename_post
     @video_attrs = ActiveStorage::Blob.find_by(id: params[:blob_id])
@@ -13,6 +20,7 @@ class TutsController < ApplicationController
   
     if @video_attrs.save
       redirect_to course_tut_path(@tut.course, @tut, params[:blob_id])
+      flash[:notice] = "Title Changed!"
     end
   end
 
@@ -103,6 +111,6 @@ class TutsController < ApplicationController
 
     # Permitting the form details into database
     def tut_params
-      params.require(:tut).permit(:course_id, :title, :position, videos: [] )
+      params.require(:tut).permit(:course_id, :title, :position, :video, videos: [] )
     end
 end

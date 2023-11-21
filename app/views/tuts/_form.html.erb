@@ -22,7 +22,16 @@
   </div>
 
 
-  
+
+    <% if tut.videos.present? %>
+      <% tut.videos.each do |video| %>
+        <ul class="list-group mt-3">
+          <li class="list-group-item"><i class="play-btn-fill"></i><%= video.filename %></li>
+        </ul>
+      <% end %>
+    <% end %>
+      
+
       <style>
         input[type="file"]::file-selector-button {
           border: 2px solid #dc35f0;
@@ -42,11 +51,12 @@
       <div class="row">
         <div class="col"></div>
         <div class="col mt-4 mb-5">
-          <%= f.file_field :videos, direct_upload: true, multiple: true %>
+          <%= f.file_field :videos, direct_upload: true, multiple: true, id: "files-upload" %>
         </div>
         <div class="col"></div>
 
       </div>
+
 
     <div class="row">
       <div class="col"></div>

@@ -30,6 +30,10 @@
                   <%= link_to edit_filename_course_tut_path(@tut.course, @tut, blob.id), data: {controller: "edit-filename"} do %>
                     <i class="bi bi-pencil" style="color:#a435f0;"></i>
                   <% end %>
+
+                  <%= link_to delete_file_post_course_tut_path(@tut.course, @tut, blob.id), data: {turbo_method: :delete} do %>
+                    <i class="bi bi-trash" style="color:red;"></i>
+                  <% end %>
                   
                 </div>
               <% end %>
@@ -98,6 +102,6 @@
 
 
 
-    <%= link_to "back to my courses", my_courses_path, class: "btn btn-sm btn-dark rounded-0 mt-3" %>
+    <%= link_to "back to topics", course_tuts_path(@tut.course) , class: "btn btn-sm btn-dark rounded-0 mt-3" %>
   </div>
 </div>

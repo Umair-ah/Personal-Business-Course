@@ -18,10 +18,12 @@ Rails.application.routes.draw do
 
     resources :tuts do
       member do 
+        resources :single_tut
         delete :remove_video
         patch :update_position
         get "/edit-file-name/:blob_id", to: "tuts#edit_filename", as: "edit_filename"
         post "/edit-file-name/:blob_id", to: "tuts#edit_filename_post", as: "edit_filename_post"
+        delete "/delete-file/:blob_id", to: "tuts#delete_file_post", as: "delete_file_post"
       end
     end
   end
