@@ -13,6 +13,7 @@ class TutsController < ApplicationController
     redirect_back(fallback_location: request.referer)
   end
   
+
   # GET Request
   def index
     @tuts = @course.tuts.order(:position)
@@ -35,6 +36,7 @@ class TutsController < ApplicationController
     @tut = @course.tuts.build
   end
 
+
   # POST Request
   def create
     @tut = @course.tuts.build(tut_params)
@@ -45,6 +47,7 @@ class TutsController < ApplicationController
       render :new
     end
   end
+
 
   # GET Request
   def edit
@@ -73,6 +76,7 @@ class TutsController < ApplicationController
   end
   
 
+
   # GET Request
   def show
     unless @tut.user_has_access?(current_user) || current_user.try(:type)
@@ -81,6 +85,8 @@ class TutsController < ApplicationController
     @course = Course.find(params[:course_id])
     @tuts = @course.tuts.all
   end
+
+
 
   private
     def set_course
@@ -96,4 +102,5 @@ class TutsController < ApplicationController
       params.require(:tut).permit(:course_id, :title, :video, :position)
     end
 
+    
 end
