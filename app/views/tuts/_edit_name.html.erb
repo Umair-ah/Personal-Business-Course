@@ -1,5 +1,10 @@
-<%= form_with(url: edit_filename_post_course_tut_path(params[:blob_id]), local: true) do |f| %>
-  <%= f.label :file_name %>
-  <%= f.text_field :file_name, value: ActiveStorage::Blob.find_by(id: params[:blob_id]).filename %>
-  <%= f.submit %>
+<%= form_with(url: edit_filename_post_course_tut_path(params[:blob_id]), local: true, class:"my-3") do |f| %>
+  <div class="row">
+    <div class="col-sm-11">
+      <%= f.text_field :file_name, value: ActiveStorage::Blob.find_by(id: params[:blob_id]).filename, class:"form-control" %>
+    </div>
+    <div class="col">
+      <%= f.submit class:"btn btn-primary btn-sm rounded-0"%>
+    </div>
+  </div>
 <% end %>

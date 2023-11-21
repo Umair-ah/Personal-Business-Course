@@ -21,9 +21,18 @@
         <% @tut.videos_blobs.each_with_index do |blob, index| %>
           <% filename = blob.filename.to_s.gsub(/\.mp4\z/, '') %>
           <ul class="list-group">
-            <div id="edit-name-<%= blob.id %>">
-             <li class="list-group-item video-filename <%= index == 0 ? 'highlighted' : '' %>" data-filename="<%= filename %>" style="cursor:pointer;"><%= filename %></li>
-             <%= link_to "Edit", edit_filename_course_tut_path(@tut.course, @tut, blob.id), data: {controller: "edit-filename"} %>
+            <div id="edit-name-<%= blob.id %>" class="row">
+              <div class="col-md-11">
+                <li class="list-group-item video-filename <%= index == 0 ? 'highlighted' : '' %>" data-filename="<%= filename %>" style="cursor:pointer; margin-left: 75px;"><%= filename %></li>
+              </div>
+              <% if current_user.try(:type) %>
+                <div class="col">
+                  <%= link_to edit_filename_course_tut_path(@tut.course, @tut, blob.id), data: {controller: "edit-filename"} do %>
+                    <i class="bi bi-pencil" style="color:#a435f0;"></i>
+                  <% end %>
+                  
+                </div>
+              <% end %>
             </div>
           </ul>
         <% end %>

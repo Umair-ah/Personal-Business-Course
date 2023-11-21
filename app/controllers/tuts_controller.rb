@@ -3,7 +3,7 @@ Stripe.api_key = "sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPI
 
 class TutsController < ApplicationController
   # These methods are called at the start of every REQUEST (i.e POST, GET, PATCH, DELETE)
-  before_action :set_course, except: %i[remove_video show]
+  before_action :set_course, except: %i[remove_video show edit_filename_post]
   before_action :set_tut, only: %i[edit remove_video update show destroy edit_filename_post edit_filename]
   before_action :authenticate_user!, only: %i[show]
 
@@ -12,7 +12,7 @@ class TutsController < ApplicationController
     @video_attrs.filename = params[:file_name]
   
     if @video_attrs.save
-      redirect_to course_tut_path(@course, @tut)
+      redirect_to course_tut_path(@tut.course, @tut, params[:blob_id])
     end
   end
 
