@@ -9,6 +9,8 @@ class TutsController < ApplicationController
 
   def remove_video
     @video = ActiveStorage::Attachment.find_by(record_id: params[:id], record_type: "Tut")
+    @video.purge_later
+    redirect_back(fallback_location: request.referer)
   end
   
   # GET Request
