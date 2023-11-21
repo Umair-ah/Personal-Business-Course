@@ -34,6 +34,16 @@ class Course < ApplicationRecord
     update_column(:stripe_price_id, price_course.id)
   end
 
+  def total_lectures(course)
+    total = 0
+    course.tuts.each do |tut|
+      tut.videos.each do |video|
+        total+=1
+      end
+    end
+    total
+  end
+
   def self.ransackable_attributes(auth_object = nil)
     ["created_at", "description", "id", "price", "stripe_price_id", "stripe_product_id", "title", "updated_at", "user_id"]
   end

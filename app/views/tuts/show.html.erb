@@ -1,21 +1,72 @@
 <div class="card container mt-4">
-
-
-
   <div class="card-body">
-    <% if @tut.video.attached? %>
       <h2 class="badge text-bg-light">Course: <%= @tut.course.title %></h2>
-      <h3 class="text-black text-center"><%= @tut.title %></h3><hr style="color: black;" />
-      <div class="ratio ratio-21x9">
-        <%= video_tag(url_for(@tut.video), width: 640, height: 360, controls: true) %>  
+      <h3 class="text-black text-center"><%= @tut.title %></h3>
+      <hr style="color: black;" />
+
+      
+      <div class="">
+        <% @tut.videos.each_with_index do |video, index| %>
+          <div class="video-container" data-filename="<%= video.blob.filename.to_s %>" style="<%= index == 0 ? 'display: block;' : 'display: none;' %>">
+            <div class="d-flex justify-content-center align-items-center">
+              <%= video_tag(url_for(video), width: 640, height: 360, controls: true) %>  
+            </div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
 
-    <hr style="color: black;" />
+      <hr style="color: black;" />
+
+      <div>
+        <% @tut.videos_blobs.each_with_index do |blob, index| %>
+          <% filename = blob.filename.to_s.gsub(/\.mp4\z/, '') %>
+          <ul class="list-group">
+            <li class="list-group-item video-filename <%= index == 0 ? 'highlighted' : '' %>" data-filename="<%= filename %>" style="cursor:pointer;"><%= filename %></li>
+          </ul>
+        <% end %>
+      </div>
+
+      <script>
+        document.addEventListener("turbo:load", function() {
+          var videoContainers = document.querySelectorAll(".video-container");
+          var videoFilenames = document.querySelectorAll(".video-filename");
+
+          videoFilenames[0].click();
+
+          videoFilenames.forEach(function(filenameElement) {
+            filenameElement.addEventListener("click", function() {
+              var filename = this.dataset.filename;
+
+              videoFilenames.forEach(function(element) {
+                element.classList.remove("highlighted");
+              });
+
+              this.classList.add("highlighted");
+
+              videoContainers.forEach(function(container) {
+                var containerFilename = container.dataset.filename;
+
+                // Use includes to check if the filename contains the selected filename
+                if (containerFilename.includes(filename)) {
+                  container.style.display = "block";
+                } else {
+                  container.style.display = "none";
+                }
+              });
+            });
+          });
+        });
+      </script>
+
+      <style>
+        .highlighted {
+          background-color: #a435f0; 
+          color: white;
+        }
+      </style>
 
 
-    <div class="d-flex justify-content-between">
-
+    <div class="d-flex justify-content-between mt-2">
       <% current_tut_index = @tuts.index(@tut) %>
 
       <% if current_tut_index && current_tut_index > 0 %>
@@ -23,37 +74,18 @@
         <%= link_to course_tut_path(@course, previous_tut) do %>
           <p class="btn btn-dark rounded-1">&#8656; Previous</p>
         <% end %>
-        
       <% end %>
 
       <% if current_tut_index && current_tut_index < @tuts.length - 1 %>
         <% next_tut = @tuts[current_tut_index + 1] %>
         <%= link_to course_tut_path(@course, next_tut) do %>
-
-            <p class="btn btn-dark rounded-1">Next &#8658;</p>
-        
+          <p class="btn btn-dark rounded-1">Next &#8658;</p>
         <% end %>
-        
       <% end %>
     </div>
 
 
-    <ul class="list-group mt-3">
-      <% @tuts.each do |tut| %>
-        <li class="list-group-item <%= 'active' if tut == @tut %> d-flex justify-content-between" style="background-color: white;">
-          <%= link_to tut.title, course_tut_path(@course, tut), class: "text-black" %>
-          <% if current_user.try(:type) %>
-            <%= link_to edit_course_tut_path(@course, tut), class: "ml-2" do %>
-              <i class="bi bi-pencil" style="color: red;"></i>
-            <% end %>
-            
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
 
-    <%= link_to "back to my courses", my_courses_path, class:"btn btn-sm btn-dark rounded-0 mt-3" %>
-
-
+    <%= link_to "back to my courses", my_courses_path, class: "btn btn-sm btn-dark rounded-0 mt-3" %>
   </div>
 </div>

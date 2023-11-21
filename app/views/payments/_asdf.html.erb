@@ -17,7 +17,9 @@
             <%= @course.description %>
           </p>
 
-          <small class="text-secondary"><%= @course.tuts.count %> lectures</small>
+          <small class="text-secondary">Total Topics: <%= @course.tuts.count %></small>
+          <br>
+          <small class="text-secondary">Total Lectures: <%= @course.total_lectures(@course) %></small>
         </div>
         <div>
           <% if current_user %>

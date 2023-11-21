@@ -90,6 +90,6 @@ class TutsController < ApplicationController
 
     # Permitting the form details into database
     def tut_params
-      params.require(:tut).permit(:course_id, :title, :video, :position)
+      params.require(:tut).permit(:course_id, :title, :position, videos: [] )
     end
 end

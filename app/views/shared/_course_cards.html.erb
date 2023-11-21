@@ -15,7 +15,8 @@
           <p class="text-secondary">
             <%= course.description %>
           </p>
-          <small class="text-secondary"><%= course.tuts.count %> lectures</small>
+          <small class="text-secondary"><%= course.tuts.count %> Topics Covered</small> <br>
+          <small class="text-secondary"><%= course.total_lectures(course) %> lectures to watch</small>
         </div>
         <div>
           <% if current_user %>

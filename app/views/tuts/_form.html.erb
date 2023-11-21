@@ -1,4 +1,4 @@
-<h5 class="text-center mt-5">Upload Video for <%= @course.title %></h5>
+<h5 class="text-center mt-5">Upload Videos for <%= @course.title %></h5>
 <%= form_with(model:[@course, tut], local: true,data: {controller: "tut", tut_target: "form"}) do |f| %>
 
   <div class="d-flex justify-content-center align-items-start mt-3">
@@ -15,21 +15,14 @@
   <div class="row mt-1 text-black">
     <div class="col"></div>
     <div class="col-md-6">
-      <%= f.label :Title %>
+      <%= f.label :Category_title %>
       <%= f.text_field :title, class:"form-control rounded-0" %>
     </div>
     <div class="col"></div>
   </div>
 
 
-    <% if tut.video.attached? %>
-    <div class="d-flex justify-content-center align-items-center">
-      <div class="d-flex flex-column">
-        <%= video_tag(url_for(tut.video), size:"300x300", controls: true) %>
-        <%= link_to "Remove video", remove_video_course_tut_path(tut), data:{turbo_method: :delete} %>
-      </div>
-    </div>
-    <% else %>
+  
       <style>
         input[type="file"]::file-selector-button {
           border: 2px solid #dc35f0;
@@ -49,12 +42,11 @@
       <div class="row">
         <div class="col"></div>
         <div class="col mt-4 mb-5">
-          <%= f.file_field :video, direct_upload: true %>
+          <%= f.file_field :videos, direct_upload: true, multiple: true %>
         </div>
         <div class="col"></div>
 
       </div>
-    <% end %>
 
     <div class="row">
       <div class="col"></div>
