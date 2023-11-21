@@ -8,6 +8,7 @@ class TutsController < ApplicationController
   before_action :authenticate_user!, only: %i[show]
 
   def remove_video
+    @video = ActiveStorage::Attachment.find_by(record_id: params[:id], record_type: "Tut")
   end
   
   # GET Request
