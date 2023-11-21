@@ -3,6 +3,7 @@ Stripe.api_key = "sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPI
 
 class TutsController < ApplicationController
   # These methods are called at the start of every REQUEST (i.e POST, GET, PATCH, DELETE)
+  before_action :set_course
   before_action :set_tut, only: %i[edit remove_video update show destroy]
   before_action :authenticate_user!, only: %i[show]
 
@@ -14,7 +15,6 @@ class TutsController < ApplicationController
   end
 
   
-
   # GET Request
   def index
     @tuts = @course.tuts.order(:position)
@@ -32,12 +32,10 @@ class TutsController < ApplicationController
     end
   end
 
-
   # GET Request
   def new
     @tut = @course.tuts.build
   end
-
 
 
   # POST Request
@@ -50,7 +48,6 @@ class TutsController < ApplicationController
       render :new
     end
   end
-
 
   # GET Request
   def edit
@@ -65,7 +62,6 @@ class TutsController < ApplicationController
     end
 
   end
-
 
  # PATCH Request which dynamically changes the position of the video while sorting (Admin feature)
   def update_position
@@ -82,7 +78,6 @@ class TutsController < ApplicationController
     end
   end
 
-  
 
 
   # GET Request
@@ -96,9 +91,7 @@ class TutsController < ApplicationController
 
 
 
-
   private
-
     def set_course
       @course = Course.find(params[:course_id])
     end
