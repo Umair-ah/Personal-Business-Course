@@ -20,7 +20,13 @@ Rails.application.routes.draw do
       member do 
         delete :remove_video
         patch :update_position
+        get "/edit-file-name/:blob_id", to: "tuts#edit_filename", as: "edit_filename"
+        post "/edit-file-name/:blob_id", to: "tuts#edit_filename_post", as: "edit_filename_post"
       end
     end
   end
+
+  get "/edit-file-name/:blob_id", to: "tuts#edit_filename", as: "edit_filename"
+  post "/edit-file-name/:blob_id", to: "tuts#edit_filename_post", as: "edit_filename_post"
+
 end

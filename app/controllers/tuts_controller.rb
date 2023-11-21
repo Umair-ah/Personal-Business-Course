@@ -3,9 +3,34 @@ Stripe.api_key = "sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPI
 
 class TutsController < ApplicationController
   # These methods are called at the start of every REQUEST (i.e POST, GET, PATCH, DELETE)
-  before_action :set_course, except: %i[remove_video show]
+  before_action :set_course, except: %i[remove_video show edit_filename edit_filename_post]
   before_action :set_tut, only: %i[edit remove_video update show destroy]
   before_action :authenticate_user!, only: %i[show]
+
+  def edit_filename_post
+    @video_attrs = ActiveStorage::Blob.find_by(id: params[:blob_id])
+    @video_attrs.filename = params[:file_name]
+  
+    if @video_attrs.save
+      redirect_to root_path
+    end
+    # respond_to do |format|
+    #   if @video_attrs.save
+    #     format.turbo_stream { 
+    #       render turbo_stream:
+    #       turbo_stream.update(
+    #         "edit-name-#{blob.id}",
+    #         partial: "tuts/name_of_video", 
+    #         locals: {blob_id:}
+    #       )
+    #     }
+    #   end
+    # end
+  end
+
+  def edit_filename
+    @blob_id = params[:blob_id]
+  end
 
   def remove_video
     @video = ActiveStorage::Attachment.find_by(record_id: params[:id], record_type: "Tut")
