@@ -3,10 +3,9 @@ Stripe.api_key = "sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPI
 
 class TutsController < ApplicationController
   # These methods are called at the start of every REQUEST (i.e POST, GET, PATCH, DELETE)
-  before_action :set_course
+  before_action :set_course, except: %i[remove_video show]
   before_action :set_tut, only: %i[edit remove_video update show destroy]
   before_action :authenticate_user!, only: %i[show]
-
 
   def remove_video
     @video = ActiveStorage::Attachment.find_by(record_id: params[:id], record_type: "Tut")
@@ -14,7 +13,6 @@ class TutsController < ApplicationController
     redirect_back(fallback_location: request.referer)
   end
 
-  
   # GET Request
   def index
     @tuts = @course.tuts.order(:position)
@@ -37,7 +35,6 @@ class TutsController < ApplicationController
     @tut = @course.tuts.build
   end
 
-
   # POST Request
   def create
     @tut = @course.tuts.build(tut_params)
@@ -50,17 +47,13 @@ class TutsController < ApplicationController
   end
 
   # GET Request
-  def edit
-
-  end
-
+  def edit; end
 
   # PATCH Request
   def update
     if @tut.update(tut_params)
       redirect_to course_tuts_path(@course)
     end
-
   end
 
  # PATCH Request which dynamically changes the position of the video while sorting (Admin feature)
@@ -70,15 +63,12 @@ class TutsController < ApplicationController
     head :ok
   end
 
-
   # DELETE Request
   def destroy
     if @tut.destroy
       redirect_to course_tuts_path(@course), notice: "Video Deleted!"
     end
   end
-
-
 
   # GET Request
   def show
@@ -89,22 +79,17 @@ class TutsController < ApplicationController
     @tuts = @course.tuts.all
   end
 
-
-
   private
     def set_course
       @course = Course.find(params[:course_id])
     end
 
-
     def set_tut
       @tut = Tut.find(params[:id])
     end
 
- 
     # Permitting the form details into database
     def tut_params
       params.require(:tut).permit(:course_id, :title, :video, :position)
     end
-
 end
