@@ -3,9 +3,9 @@ Stripe.api_key = "sk_test_51NcIGEJdM2t98eyhyW2R6HDffCWMy4msgF16bpW3Mi20ihKOgpoPI
 
 class TutsController < ApplicationController
   # These methods are called at the start of every REQUEST (i.e POST, GET, PATCH, DELETE)
-  before_action :set_course, except: %i[remove_video show edit_filename_post delete_file_post]
-  before_action :set_tut, only: %i[edit remove_video update show destroy edit_filename_post edit_filename delete_file_post]
-  before_action :authenticate_user!, only: %i[show]
+  before_action :set_course, except: %i[remove_video edit_filename_post delete_file_post]
+  before_action :set_tut, only: %i[edit remove_video update destroy edit_filename_post edit_filename delete_file_post]
+  before_action :authenticate_user!, except: %i[index]
 
   def delete_file_post
     if @tut.videos.find_by(blob_id: params[:blob_id]).purge_later
@@ -19,7 +19,8 @@ class TutsController < ApplicationController
     @video_attrs.filename = params[:file_name]
   
     if @video_attrs.save
-      redirect_to course_tut_path(@tut.course, @tut, params[:blob_id])
+      #redirect_to course_tut_path(@tut.course, @tut, params[:blob_id])
+      redirect_to request.referrer
       flash[:notice] = "Title Changed!"
     end
   end
@@ -30,7 +31,8 @@ class TutsController < ApplicationController
 
   def remove_video
     if @tut.videos.find_by(blob_id: params[:blob_id]).purge_later
-      redirect_to edit_course_tut_path(@tut.course)
+      #redirect_to edit_course_tut_path(@tut.course)
+      redirect_to request.referrer
       flash.now[:notice] = "Video Deleted!"
     end
   end
@@ -92,15 +94,6 @@ class TutsController < ApplicationController
     if @tut.destroy
       redirect_to course_tuts_path(@course), notice: "Video Deleted!"
     end
-  end
-
-  # GET Request
-  def show
-    unless @tut.user_has_access?(current_user) || current_user.try(:type)
-      redirect_to course_payments_path(params[:course_id]), alert: "You Have Not Payed for the course yet!"
-    end
-    @course = Course.find(params[:course_id])
-    @tuts = @course.tuts.all
   end
 
   private

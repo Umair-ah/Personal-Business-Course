@@ -3,7 +3,7 @@
 </div>
 <% if current_user.try(:type) %>
   <div class="mt-4 d-flex justify-content-center mb-2"> 
-    <%= link_to "Upload +", new_course_tut_path(Course.find(params[:course_id])), class:"btn btn-danger" %>
+    <%= link_to "New Category +", new_course_tut_path(Course.find(params[:course_id])), class:"btn btn-primary text-light" %>
   </div>
 <% end %>
 
@@ -16,15 +16,18 @@
       data-sortable-resource-name-value="tut"
       data-sortable-handle-value=".handle">
       <% @tuts.each do |tut| %>
-      <li 
-        class="list-vids"
+      <li
+        class="list-vids category<%= tut.id %>"
+        data-controller="category"
+        data-category-target="dropdown"
         data-sortable-update-url="<%= update_position_course_tut_path(tut.course, tut) %>">
         <div class="container">
           <div class="d-flex justify-content-between">
-            <%= link_to course_tut_path(@course, tut) do %>
-              <h6><i class="bi bi-play-circle-fill"></i> <%= tut.title %> </h6>
+            <%= link_to "javascript:void(0)" do %>
+              <h6><i class="bi bi-chevron-down"></i> <%= tut.title %> </h6>
               <small style="color: black;"> Lectures to watch: <%= tut.videos.count %></small>
             <% end %>
+
             
             <div class="d-flex justify-content-end gap-3">
               <% if current_user.try(:type) %>
@@ -39,6 +42,40 @@
               <% end %>
             </div>
           </div>
+
+            <div class="vids-list<%= tut.id %> d-none" data-category-target="vidsList">
+            <hr style="color: black;"/>
+               <% tut.videos_blobs.each_with_index do |blob, index| %>
+                <% filename = blob.filename.to_s.gsub(/\.mp4\z/, '') %>
+                <ul class="list-group">
+                  <div id="edit-name-<%= blob.id %>" class="row">
+                    <div class="col-md-11">
+                      <li class="list-group-item mb-1" style="background: #f1f1f1;">
+                        <%= link_to video_title_course_tut_path(tut.course, tut, filename), class:"text-primary", onclick: "event.stopPropagation();" do %>
+
+                          <i class="bi bi-play-circle-fill"></i>  <%= filename %>
+                        <% end %>
+                        
+                      </li>
+                    </div>
+                    <% if current_user.try(:type) %>
+                      <div class="col">
+                        <%= link_to edit_filename_course_tut_path(tut.course, tut, blob.id), data: {controller: "edit-filename"}, onclick: "event.stopPropagation();" do %>
+                          <i class="bi bi-pencil" style="color:#a435f0;"></i>
+                        <% end %>
+
+                        <%= link_to delete_file_post_course_tut_path(tut.course, tut, blob.id), data: {turbo_method: :delete}, onclick: "event.stopPropagation();" do %>
+                          <i class="bi bi-trash" style="color:red;"></i>
+                        <% end %>
+                        
+                      </div>
+                    <% end %>
+                  </div>
+                </ul>
+              <% end %>
+
+              
+            </div>
         </div>
       </li>
       <% end %>

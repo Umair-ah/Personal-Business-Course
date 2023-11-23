@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary" style="border-bottom: 1px solid black;">
+<nav class="navbar navbar-expand-lg bg-body-tertiary" style="border-bottom: 1px solid #00acc1;">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -64,11 +64,11 @@
 
         <% unless current_user %>
           <li class="nav-item mt-2">
-            <%= link_to "Sign Up", new_user_registration_path, class:" nav-link mx-2 btn rounded-0 text-white", style:"background: #212529; padding-left: 20px; padding-right: 20px;" %>
+            <%= link_to "Sign Up", new_user_registration_path, class:" nav-link mx-2 btn rounded-0 text-white", style:"background: #00acc1; padding-left: 20px; padding-right: 20px;" %>
 
           </li>
           <li class="nav-item mt-2">
-            <%= link_to "Log In", new_user_session_path, class:" nav-link mx-2 btn rounded-0", style:"border: 1px solid; padding-left: 20px; padding-right: 20px;" %>
+            <%= link_to "Log In", new_user_session_path, class:" nav-link mx-2 btn rounded-0", style:"border: 1px solid #00acc1; padding-left: 20px; padding-right: 20px; color: #00acc1;" %>
           </li>
         <% end %>
 

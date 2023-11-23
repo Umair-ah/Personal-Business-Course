@@ -1,0 +1,77 @@
+<div class="card container my-4">
+
+
+
+  <div class="card-body">
+    <% if @tut.videos.attached? %>
+      <h2 class="badge text-bg-warning text-light"><i class="bi bi-suit-diamond-fill"></i> <%= @tut.course.title %></h2>
+
+      <h3 class="text-black text-center display-3 fw-bold"><%= @tut.title %></h3><hr style="color: black;" />
+      <div class="ratio ratio-21x9">
+        <%= video_tag(url_for(@single_video), width: 640, height: 360, controls: true) %>  
+      </div>
+    <% end %>
+
+    <hr style="color: black;" />
+
+    <div>
+      <h3 class="display-5 text-center"><%= @single_video.filename %></h3>
+    </div>
+
+    <div>
+        <% @tut.videos_blobs.each_with_index do |blob, index| %>
+          <% filename = blob.filename.to_s.gsub(/\.mp4\z/, '') %>
+          <ul class="list-group">
+            <div id="edit-name-<%= blob.id %>" class="row d-flex justify-content-center align-items-center">
+              <div class="col-md-11">
+                <%= link_to video_title_course_tut_path(@tut.course, @tut, filename), class:"#{params[:video_title] == filename ? "text-light" : ''}" do %>
+                  <li class="list-group-item <%= params[:video_title] == filename ? "active" : '' %>">
+                    <%= filename %>
+                  </li>
+                <% end %>
+              </div>
+              <% if current_user.try(:type) %>
+                <div class="col">
+                  <%= link_to edit_filename_course_tut_path(@tut.course, @tut, blob.id), data: {controller: "edit-filename"} do %>
+                    <i class="bi bi-pencil" style="color:#a435f0;"></i>
+                  <% end %>
+
+                  <%= link_to delete_file_post_course_tut_path(@tut.course, @tut, blob.id), data: {turbo_method: :delete} do %>
+                    <i class="bi bi-trash" style="color:red;"></i>
+                  <% end %>
+                  
+                </div>
+              <% end %>
+            </div>
+          </ul>
+        <% end %>
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+          <% current_tut = params[:id].to_i %>
+          <% current_tut %>
+
+          <% if current_tut && current_tut > 1 %>
+            <% previous_tut = current_tut - 1 %>
+            <% previous_tutorials = Tut.find(previous_tut) %>
+            <%= link_to video_title_course_tut_path(@course, previous_tut, previous_tutorials.videos[0].filename) do %>
+              <p class="btn btn-outline-primary rounded-1 text-dark">&#8656; Previous Topic</p>
+            <% end %>
+          <% end %>
+          
+
+          <% if current_tut && current_tut < @course.tuts.count %>
+            <% next_tut = current_tut + 1 %>
+            <% next_tutorials = Tut.find(next_tut) %>
+            <%= link_to video_title_course_tut_path(@course, next_tut, next_tutorials.videos[0].filename) do %>
+              <p class="btn btn-outline-primary rounded-1 text-dark">Next Topic &#8658;</p>
+            <% end %>
+          <% end %>
+      </div>
+
+
+
+      <%= link_to "back to topics", course_tuts_path(@tut.course) , class: "btn btn-sm btn-primary rounded-0 mt-3" %>
+
+  </div>
+</div>
